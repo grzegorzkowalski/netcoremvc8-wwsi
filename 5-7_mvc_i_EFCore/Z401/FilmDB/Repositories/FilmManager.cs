@@ -1,18 +1,18 @@
 ﻿using FilmDB.Data;
 using FilmDB.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
-namespace FilmDB.Repository
+namespace FilmDB.Repositories
 {
     public class FilmManager
     {
         private readonly ApplicationDbContext _context;
-
-        public FilmManager(ApplicationDbContext context) {  
-            _context = context; 
+        public FilmManager(ApplicationDbContext context) 
+        { 
+            _context = context;
         }
-
-        public async Task AddFilmAsync(FilmModel filmModel)
+        public async Task<FilmManager> AddFilm(FilmModel filmModel)
         {
             try
             {
@@ -21,14 +21,18 @@ namespace FilmDB.Repository
             }
             catch (Exception e)
             {
-                filmModel.ID = 0;
+                filmModel.Id = 0;
                 await _context.SaveChangesAsync();
             }
+
+
+            return this;
         }
 
         public async Task<FilmManager> RemoveFilm(int id)
         {
-            var filmToDelete = await GetFilm(id);
+            var filmToDelete = _context.Films.SingleOrDefault(x => x.Id == id);
+
             if (filmToDelete != null) 
             { 
                 _context.Films.Remove(filmToDelete);
@@ -40,31 +44,32 @@ namespace FilmDB.Repository
 
         public async Task<FilmManager> UpdateFilm(FilmModel filmModel)
         {
-            _context.Films.Update(filmModel);
+            _context.Update(filmModel);
             await _context.SaveChangesAsync();
             return this;
         }
 
         public async Task<FilmManager> ChangeTitle(int id, string newTitle)
         {
-            var filmToChageTitle = await GetFilm(id);
-            if (filmToChageTitle != null)
+            var filtToEdit = await GetFilm(id);
+            if (filtToEdit != null)
             {
-                filmToChageTitle.Title = newTitle;
-                await _context.SaveChangesAsync();
+                var title = newTitle != null ? newTitle : "Brak tytułu";
+                filtToEdit.Title = title;
             }
+            await _context.SaveChangesAsync();
             return this;
         }
 
         public async Task<FilmModel> GetFilm(int id)
         {
-            return await _context.Films.SingleOrDefaultAsync(f => f.ID == id);
+            var film = await _context.Films.SingleOrDefaultAsync(x => x.Id == id);
+            return film;
         }
 
-        public async Task <List<FilmModel>> GetFilms()
+        public async Task<List<FilmModel>> GetFilms()
         {
-            var films = await _context.Films.ToListAsync();
-            return films;
+            return await _context.Films.ToListAsync();
         }
     }
 }
