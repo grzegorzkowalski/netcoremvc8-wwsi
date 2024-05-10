@@ -51,5 +51,19 @@ namespace FilmDB.Controllers
             await _manager.RemoveFilm(id);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var filmToEdit = await _manager.GetFilm(id);
+            return View(filmToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(FilmModel film)
+        {
+            await _manager.UpdateFilm(film);
+            return RedirectToAction("Index");
+        }
     }
 }
