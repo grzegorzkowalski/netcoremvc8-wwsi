@@ -37,5 +37,19 @@ namespace FilmDB.Controllers
                 return View(film);
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Remove(int id)
+        {
+            var filmToDelete = await _manager.GetFilm(id);
+            return View(filmToDelete);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveConfirm(int id)
+        {
+            await _manager.RemoveFilm(id);
+            return RedirectToAction("Index");
+        }
     }
 }
