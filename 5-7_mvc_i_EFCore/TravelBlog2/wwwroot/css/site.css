@@ -1,0 +1,192 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+/*    Etap I - Nag³ówek    */
+
+
+.navigation-menu {
+    width: 100%;
+    background-color: #f3f3f3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    padding: 20px 0;
+    max-height: max-content;
+}
+
+.navigation-header {
+    max-width: 1230px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation-menu img,
+.menu-box {
+    margin: 0 auto;
+    display: block;
+}
+
+.menu-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 40px;
+}
+
+    .menu-box li {
+        width: fit-content;
+        float: left;
+        padding: 20px;
+        list-style-type: none;
+        font-family: 'Poppins', sans-serif;
+        text-transform: uppercase;
+        animation-duration: 1s;
+        animation-delay: 0s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: 1;
+    }
+
+        .menu-box li:hover a {
+            transition: all 250ms;
+            color: #666666;
+        }
+
+        .menu-box li:nth-child(2n):hover {
+            animation-name: scale;
+        }
+
+        .menu-box li:nth-child(2n):active {
+            transition: all 250ms;
+            box-shadow: 1px 1px 4px 1px gray inset;
+            background-color: #e2e2e2;
+        }
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.menu-box li a {
+    color: black;
+    text-decoration: none;
+}
+
+.navigation-button-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation-menu-button,
+.navigation-menu-button::before,
+.navigation-menu-button::after {
+    display: block;
+    background-color: black;
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
+}
+
+    .navigation-menu-button::before {
+        content: '';
+        margin-top: -8px;
+    }
+
+    .navigation-menu-button::after {
+        content: '';
+        margin-top: 8px;
+    }
+
+#menu-toggle {
+    display: none;
+}
+
+    #menu-toggle:checked + .navigation-button-container .navigation-menu-button::before {
+        margin-top: 0px;
+        transform: rotate(45deg);
+    }
+
+    #menu-toggle:checked + .navigation-button-container .navigation-menu-button {
+        background: transparent;
+    }
+
+        #menu-toggle:checked + .navigation-button-container .navigation-menu-button::after {
+            margin-top: 0px;
+            transform: rotate(-45deg);
+        }
+
+@media screen and (max-width: 800px) {
+    .navigation-header {
+        position: relative;
+    }
+
+    .menu-box {
+        transition: all 250ms;
+        overflow: hidden;
+        flex-direction: column;
+        max-height: 0;
+    }
+
+        .menu-box li:nth-child(2n-1) {
+            display: none;
+        }
+
+    .navigation-button-container {
+        display: flex;
+    }
+
+    #menu-toggle:checked ~ .menu-box {
+        max-height: 999px;
+        height: 100%;
+    }
+}
+
+.margin-top {
+    margin-top: 180px;
+}
