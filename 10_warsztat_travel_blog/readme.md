@@ -5,7 +5,7 @@
 1. W folderze `projekt_statyczny` mamy gotową stronę html o tematyce podróżniczej. Jest to strona statyczna bez komunikacji, pobierania danych, możliwości wysyłki formularza itd.
 1. Naszym zadaniem jest wykorzystać statyczny kontent i przerobić stronę, żeby na etapie końcowym naszego warsztatu była w pełni dynamicznym blokiem z pobieraniem danych z api, możliwością przesłania formularza i wykorzystaniem innym możliwości .NET Core.
 1. Stwórz nowy projekt .NET Core Web App `TravelBlog`.
-1. Wybierz framework .NET 6 i typ uwierzytelniania Individual Accounts.
+1. Wybierz framework .NET 8 i typ uwierzytelniania Individual Accounts.
 1. Wykonaj migrację danych.
 1. Sprawdź czy baza danych z odpowiednimi tabelami została utworzona.
 1. Przetestuj czy projekt się uruchamia.
